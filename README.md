@@ -9,7 +9,10 @@ This repository is dedicated to AI edge-algorithm demos for Quectel Pi. It provi
 | Directory | Demo | Documentation |
 | --- | --- | --- |
 | [`face_project`](face_project/README.md) | Face recognition | Camera and local-image recognition, including face registration. |
+| [`facial_attributes_project`](facial_attributes_project/README.md) | Facial attributes | Multi-face emotion, age and gender prediction with annotated JPG and JSON export. |
 | [`gesture_project`](gesture_project/README.md) | Gesture recognition | Hand detection and gesture classification from a camera or local image. |
+| [`ocr_project`](ocr_project/README.md) | OCR text recognition | Text detection and recognition from a camera or local image, with annotated, TXT, JSON and LabelMe export. |
+| [`posture_detection_project`](posture_detection_project/README.md) | Posture detection | Human keypoint based sitting-posture detection (cheek support, head bowing, unbalanced shoulders) with real-time preview. |
 
 Follow the README in each demo directory for its device setup, SDK requirements, build, and run instructions. SDKs, proprietary runtime libraries, models, and device authorization materials are not included in this repository. Obtain them through authorized channels, and do not commit authorization data or sensitive biometric data.
 

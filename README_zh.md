@@ -9,7 +9,10 @@
 | 目录 | 内容 | 说明 |
 | --- | --- | --- |
 | [`face_project`](face_project/README.zh.md) | 人脸识别 | 摄像头与本地图片识别示例，包含人脸注册功能。 |
+| [`facial_attributes_project`](facial_attributes_project/README.zh.md) | 人脸属性检测 | 多人脸表情、年龄与性别预测示例，支持标注图与 JSON 导出。 |
 | [`gesture_project`](gesture_project/README.zh.md) | 手势识别 | 摄像头与本地图片手部检测和手势分类示例。 |
+| [`ocr_project`](ocr_project/README.zh.md) | OCR 文字识别 | 摄像头与本地图片文字检测和识别示例，支持标注图、TXT、JSON 与 LabelMe 导出。 |
+| [`posture_detection_project`](posture_detection_project/README_zh.md) | 坐姿检测 | 基于人体关键点的坐姿检测（托腮 / 低头趴桌 / 高低肩）示例，支持实时预览。 |
 
 ## 使用说明
 
