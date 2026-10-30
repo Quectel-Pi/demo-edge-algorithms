@@ -2,6 +2,8 @@
 
 Qt5 desktop demo for the Quectel Pi M2 (RK3576, Debian/Ubuntu aarch64). It runs the Gesture SDK's hand-detection and gesture-classification pipeline on a USB camera or a selected image. The UI is English and includes RAM, storage, and CPU usage.
 
+![Gesture recognition demo](assets/gesture-demo.png)
+
 ## Requirements
 
 - Quectel Pi M2 / RK3576 running Debian or Ubuntu aarch64 with a desktop session

@@ -1,129 +1,54 @@
-# Quectel Pi M2 OCR Demo
+# OCR Text Recognition Demo
 
-English | [简体中文](README.zh.md)
+Qt5 desktop demo for the Quectel Pi M2 (RK3576, Debian aarch64). It runs the OCR SDK (DeepOCR) text detection and recognition pipeline on a USB camera or a selected image. Results can be exported as an annotated image, TXT, JSON, and LabelMe JSON.
 
-Qt5 desktop demo for the RK3576 NPU OCR SDK (DeepOCR) on the Quectel Pi M2 board (Debian aarch64). It runs OCR on local images and a USB camera, draws text polygons with the recognized text, and exports results in several formats.
-
-Built with C++17, Qt 5 Widgets and the SDK's bundled OpenCV, compiled natively on the board and run as the regular user `pi`.
-
-## Features
-
-- Image input (PNG/JPEG/BMP) and USB camera input with automatic device enumeration.
-- Clockwise rotation 0/90/180/270; recognition coordinates match the rotated image.
-- Adjustable detection threshold (0.01–0.99, default 0.20).
-- Text-region polygons with toggleable labels, a results table, full-text view and copy.
-- Export: annotated PNG, source PNG, UTF-8 TXT, structured JSON and LabelMe JSON.
-- Status bar with init/auth state, SDK return code, region count and inference time.
-- Separate capture and inference threads: the preview streams at camera rate while OCR runs asynchronously on the latest frame, so live video stays smooth regardless of inference latency. Headless mode is available for scripting.
-
-The table, text and exports come from real SDK results. On failure the demo clears results, stops the live loop and disables export. `rc=0` with no regions is a normal "no text" result.
+![OCR text recognition demo](assets/ocr.png)
 
 ## Requirements
 
-| Item | Requirement |
-| --- | --- |
-| Board | Quectel Pi M2 / RK3576 |
-| OS | Debian 13, aarch64 |
-| User | regular user `pi` (in `video`, `render` groups) |
-| Toolchain | system g++, C++17 |
-| GUI | Qt 5 Widgets |
-| OpenCV | bundled SDK OpenCV 4.2 only (do not mix system OpenCV) |
-| Runtime | RKNN runtime 2.3.2 |
+- Quectel Pi M2 / RK3576 running Debian aarch64 with a desktop session
+- C++17 compiler, `make`, `pkg-config`, Qt5 Widgets development files, and Noto CJK fonts
+- The vendor-provided RK3576 OCR SDK package `RK_OCR_NPU_1.2`
+- USB camera for live recognition (optional for image mode)
 
-```sh
-sudo apt-get install -y build-essential pkg-config qtbase5-dev fonts-noto-cjk
-```
+The SDK, model files, and proprietary runtime libraries are not included in this repository. Obtain the SDK through the authorized vendor channel. Do not commit SDK binaries, model files, device-bound licenses, or authorization codes to a public repository.
 
-System `libopencv-dev` is not required; the project links only the SDK's `libopencv_world.so`.
+## Build
 
-## Project layout
+Place the SDK package at `$HOME/RK_OCR_NPU_1.2`, then run on the device as the desktop user:
 
-```text
-ocr_project/
-├── src/ocr_cam_demo.cpp   # SDK wrapper, capture, worker thread, Qt UI, export
-├── Makefile / build.sh    # native g++ / Qt5Widgets build
-├── setup_from_sdk.sh      # copy SDK headers, libs, models, images
-├── run.sh                 # runtime environment entry
-└── README.md / README.zh.md
-```
-
-`include/`, `lib/`, `models/`, `images/` are produced by `setup_from_sdk.sh`; `license/` and `outputs/` are created at runtime. They are generated/runtime artifacts and should not be committed.
-
-## Quick start
-
-This repo does not include the SDK, models or license. Obtain the OCR SDK package `RK_OCR_NPU_1.2` (DeepOCR) from your algorithm vendor first; `setup_from_sdk.sh` locates the RK3576 Linux `deep_ocr` inside it.
-
-Upload the whole SDK package and this project to the board (example uses adb):
-
-```sh
-adb push RK_OCR_NPU_1.2 /home/pi/RK_OCR_NPU_1.2
-adb push ocr_project /home/pi/ocr_project
-```
-
-In an adb root shell, hand ownership to the regular user `pi`:
-
-```sh
-chown -R pi:pi /home/pi/RK_OCR_NPU_1.2 /home/pi/ocr_project
-```
-
-Build and run as `pi`:
-
-```sh
-cd ~/ocr_project
-sh setup_from_sdk.sh ~/RK_OCR_NPU_1.2
+```bash
+cd "$HOME/ocr_project"
+sh setup_from_sdk.sh "$HOME/RK_OCR_NPU_1.2"
 sh build.sh
-sh run.sh
 ```
 
-`setup_from_sdk.sh` only copies dependencies; it does not download, activate licensing, or modify SDK source. The default SDK path is `$HOME/RK_OCR_NPU_1.2` (a `deep_ocr` directory also works). Chinese guide: [README.zh.md](README.zh.md).
+`setup_from_sdk.sh` locates the SDK's RK3576 Linux `deep_ocr` directory and copies the header, runtime libraries, models, and sample images into this project. `build.sh` builds `ocr_cam_demo` using the system Qt5 and the SDK's bundled OpenCV library; do not mix it with the system OpenCV.
+
+Required Debian packages, if missing:
+
+```bash
+sudo apt update
+sudo apt install -y build-essential pkg-config qtbase5-dev fonts-noto-cjk
+```
+
+## Run
+
+Start the app from the device's graphical desktop session:
+
+```bash
+cd "$HOME/ocr_project"
+./run.sh                                     # Launch the UI
+./run.sh --camera /dev/videoN                # Use a specific camera node
+./run.sh --headless --image images/111.png   # Recognize an image without a window
+./run.sh --headless --help                   # Show all options
+```
+
+The UI provides **Image**, **Camera**, **Copy text**, and **Export**; the detection threshold and rotation can be adjusted in the UI. The app scans for USB video-capture nodes and does not assume `/dev/video0`. Results are exported to `outputs/` by default.
 
 ## Authorization
 
-The module is fixed to `3`. The auth code is passed via `OCR_AUTH_CODE`; `run.sh` exports a placeholder `REPLACE_WITH_ALGORITHM_AUTH_CODE` that integrators replace with their own code. The source never embeds a code.
-
-```sh
-# Option 1: edit run.sh and replace REPLACE_WITH_ALGORITHM_AUTH_CODE
-# Option 2: pass it via the environment before launching
-cd ~/ocr_project
-read -r -s -p 'OCR authorization code: ' OCR_AUTH_CODE; printf '\n'
-export OCR_AUTH_CODE
-sh run.sh
-```
-
-`OCR_LICENSE_FILE` overrides the license path (default `license/ocr.lic`, generated by the SDK on first run). Check `init()`, `get_status(0)` and `get_status(1)`. Never commit `license/` or publish raw SDK logs.
-
-## Command line
-
-```sh
-sh run.sh --headless --image images/111.png
-sh run.sh --headless --camera auto --frames 3
-sh run.sh --headless --help
-```
-
-Options: `--headless`, `--image`, `--camera`, `--confidence 0.01-0.99`, `--rotate 0/90/180/270`, `--frames`, `--repeat`, `--output`, `--quit-after`, `--screenshot`, `--self-test`. `--image` and `--camera` are mutually exclusive.
-
-Exit codes: 0 success, 2 invalid input, 3 init/auth failure, 4 inference failure, 5 export failure, 6 runtime error, 130 interrupted.
-
-## SDK API
-
-```cpp
-DeepOcr sdk;
-sdk.set_param(confidence);
-int rc = sdk.init(model, license, 3, auth);
-int model_status = sdk.get_status(0);   // 0 = ready
-int auth_status  = sdk.get_status(1);   // 0 = authorized
-std::vector<OCR_Rec_Result> results;    // { box polygon, UTF-8 text }
-rc = sdk.inference(bgr.data, bgr.rows, bgr.cols, bgr.channels(), results);
-sdk.uinit();
-```
-
-Input is continuous 3-channel BGR. SDK return codes: 0 OK, -1 init, -2 uninit, -3 inference, -4 empty image, -5 null JSON, -6 JSON parse. Auth issues are reported via `get_status(1)`, not `-3`.
-
-## Notes
-
-- The SDK returns text and polygon coordinates, with no per-item confidence; the threshold is a detection parameter.
-- No translation, table reconstruction, handwriting guarantee or QR decoding; a QR pattern in a sample image does not imply QR decoding.
-- Only the bundled OpenCV 4.2 world library must be used to avoid ABI conflicts.
+Set a valid authorization code through `OCR_AUTH_CODE` or replace the `REPLACE_WITH_ALGORITHM_AUTH_CODE` placeholder in `run.sh`; the placeholder is not a valid code. `run.sh` sets `OCR_LICENSE_FILE` to the project-local `license/ocr.lic`, which the SDK creates after the first successful authorization. Retain this device-bound file between runs; do not copy it to another device or commit it. The first authorization requires network access and a correct system time.
 
 ## Reporting Issues
 

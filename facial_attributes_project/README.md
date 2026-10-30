@@ -2,6 +2,8 @@
 
 Qt5 desktop demo for Quectel Pi M2, RK3576, Debian aarch64. Uses the supplied RK3576 Linux facial attributes SDK without changing its authorization behavior.
 
+![Facial attributes demo](assets/facial_attributes.png)
+
 Features: USB camera and local images, multiple faces, seven emotion scores, estimated age, gender scores, confidence/NMS controls, annotated JPG and JSON export, inference timing and device status. The three-column layout follows `face_project`. Face numbers are frame-local, not tracking identities. Predictions are model estimates, not verified personal attributes or emotional states.
 
 See [Chinese setup and usage](README.zh.md) for quick-start instructions.
@@ -23,4 +25,8 @@ sh run.sh --image images/input.jpg
 Use **Save Result** to export the current annotated image and its JSON results to `outputs/`. The JSON includes face boxes, detection scores, seven emotion scores, gender scores, estimated age, image dimensions and inference time. `F` toggles fullscreen and `Esc` exits.
 
 The SDK does not provide landmarks, face recognition, liveness or mask detection on this platform. These are not simulated. Use only bundled OpenCV world 4.2.0 to avoid ABI conflicts.
+
+## Reporting Issues
+
+If you encounter any issues during use, please submit technical inquiries on the [Quectel Official Forum](https://forumschinese.quectel.com/c/quectel-pi/58). Our technical support team will respond promptly. Feel free to submit Issues and Pull Requests to improve this project.
 

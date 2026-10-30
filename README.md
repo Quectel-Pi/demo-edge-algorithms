@@ -11,6 +11,7 @@ This repository is dedicated to AI edge-algorithm demos for Quectel Pi. It provi
 | [`face_project`](face_project/README.md) | Face recognition | Camera and local-image recognition, including face registration. |
 | [`facial_attributes_project`](facial_attributes_project/README.md) | Facial attributes | Multi-face emotion, age and gender prediction with annotated JPG and JSON export. |
 | [`gesture_project`](gesture_project/README.md) | Gesture recognition | Hand detection and gesture classification from a camera or local image. |
+| [`maskdet_project`](maskdet_project/README.md) | Mask detection | Mask-wearing detection (correct / no mask / incorrect) from a camera or local image, with annotated, TXT, JSON and LabelMe export. |
 | [`ocr_project`](ocr_project/README.md) | OCR text recognition | Text detection and recognition from a camera or local image, with annotated, TXT, JSON and LabelMe export. |
 | [`posture_detection_project`](posture_detection_project/README.md) | Posture detection | Human keypoint based sitting-posture detection (cheek support, head bowing, unbalanced shoulders) with real-time preview. |
 
