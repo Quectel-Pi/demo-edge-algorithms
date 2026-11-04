@@ -4,6 +4,8 @@ English | [简体中文](README.zh.md)
 
 Qt5 desktop demo for Quectel Pi M2 (RK3576, Debian/Ubuntu aarch64). Supports USB-camera and local-image face recognition, landmarks, head pose, and persistent face registration. The English UI displays the face database count and RAM, storage, and CPU usage.
 
+![Face recognition demo](assets/face-demo.png)
+
 ## Requirements
 
 - RK3576 Debian/Ubuntu aarch64 with a graphical desktop session

@@ -4,6 +4,8 @@
 
 面向 Quectel Pi M2（RK3576、Debian/Ubuntu aarch64）的 Qt5 桌面 Demo，支持 USB 摄像头与本地图片人脸识别、关键点、头部姿态和注册持久化。界面为英文，显示底库数量及 RAM、存储和 CPU 使用情况。
 
+![人脸识别效果](assets/face-demo.png)
+
 ## 环境要求
 
 - RK3576 Debian/Ubuntu aarch64，带图形桌面会话

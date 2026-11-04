@@ -2,6 +2,8 @@
 
 面向 Quectel Pi M2（RK3576、Debian/Ubuntu aarch64）的 Qt5 桌面 Demo，调用 Gesture SDK 完成手部检测和手势分类。支持 USB 摄像头实时识别与本地图片识别，界面显示 RAM、ROM 和 CPU 使用情况。
 
+![手势识别效果](assets/gesture-demo.png)
+
 ## 环境要求
 
 - RK3576 Debian/Ubuntu aarch64，带桌面会话

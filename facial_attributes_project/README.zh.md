@@ -2,6 +2,8 @@
 
 面向 Quectel Pi M2（RK3576 / Debian aarch64）的 Qt5 桌面项目。项目结构和三栏界面参考 `face_project`，使用 RK3576 Linux 人脸属性 SDK 的公开接口，不修改 SDK 或授权逻辑。
 
+![人脸属性检测效果](assets/facial_attributes.png)
+
 ## 功能
 
 - USB 摄像头实时采集，自动排除 ISP 节点，也可指定设备节点或索引。
@@ -80,4 +82,8 @@ runuser -u pi -- sh -c 'cd /home/pi/facial_attributes_project && sh run.sh'
 ## 结果保存
 
 处理图片或摄像头画面后，点击 **Save Result** 将当前帧及该帧的全部检测结果保存到 `outputs/`：标注 JPG 包含人脸框和属性标签；JSON 包含原图坐标框、检测分数、表情类别及七项 `emotion_scores`、性别类别及两项 `gender_scores`、`age_estimate`、图像尺寸和推理耗时。该 JSON 是本项目的结构化结果格式，不是 SDK 的 LabelMe JSON。
+
+## 报告问题
+
+如在使用过程中遇到问题，欢迎在[移远官方论坛](https://forumschinese.quectel.com/c/quectel-pi/58) 提交技术咨询，我们的技术支持团队将及时为您解答。 欢迎提交Issue和Pull Request来改进此项目。
 
