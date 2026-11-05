@@ -1,0 +1,13 @@
+# Build output
+build/
+
+# Runtime license cache
+license/
+
+# Algorithm packages (proprietary, never commit)
+aivox-scr-xiaoyuantongxue-zipformer-960k-zh/
+
+# Editor/temp files
+*.swp
+*.tmp
+.DS_Store
