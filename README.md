@@ -14,6 +14,10 @@ This repository is dedicated to AI edge-algorithm demos for Quectel Pi. It provi
 | [`maskdet_project`](maskdet_project/README.md) | Mask detection | Mask-wearing detection (correct / no mask / incorrect) from a camera or local image, with annotated, TXT, JSON and LabelMe export. |
 | [`ocr_project`](ocr_project/README.md) | OCR text recognition | Text detection and recognition from a camera or local image, with annotated, TXT, JSON and LabelMe export. |
 | [`posture_detection_project`](posture_detection_project/README.md) | Posture detection | Human keypoint based sitting-posture detection (cheek support, head bowing, unbalanced shoulders) with real-time preview. |
+| [`ans_project`](ans_project/README.md) | Audio Denoising | Real-time audio capture and frame-by-frame denoising; stationary noise suppression + non-stationary noise suppression; supports WAV export. |
+| [`asr_project`](asr_project/README.md) | Speech Recognition | Real-time streaming speech recognition; displays recognized Chinese characters in real time. |
+| [`kws_project`](kws_project/README.md) | Keyword Spotting | Streaming wake-word detection; supports multiple editable wake words; keeps a history of wake-ups. |
+| [`tts_project`](tts_project/README.md) | Speech Synthesis | Chinese speech synthesis from input text; output through the speaker; supports WAV export. |
 
 Follow the README in each demo directory for its device setup, SDK requirements, build, and run instructions. SDKs, proprietary runtime libraries, models, and device authorization materials are not included in this repository. Obtain them through authorized channels, and do not commit authorization data or sensitive biometric data.
 
