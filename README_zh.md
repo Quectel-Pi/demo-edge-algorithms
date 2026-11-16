@@ -14,6 +14,10 @@
 | [`maskdet_project`](maskdet_project/README.zh.md) | 口罩检测 | 摄像头与本地图片口罩佩戴状态检测（正确佩戴 / 未佩戴 / 不正确佩戴）示例，支持标注图、TXT、JSON 与 LabelMe 导出。 |
 | [`ocr_project`](ocr_project/README.zh.md) | OCR 文字识别 | 摄像头与本地图片文字检测和识别示例，支持标注图、TXT、JSON 与 LabelMe 导出。 |
 | [`posture_detection_project`](posture_detection_project/README_zh.md) | 坐姿检测 | 基于人体关键点的坐姿检测（托腮 / 低头趴桌 / 高低肩）示例，支持实时预览。 |
+| [`ans_project`](ans_project/README_zh.md) | 音频降噪 | 实时音频采集与逐帧降噪，平稳噪声抑制 + 非平稳噪声抑制，支持WAV导出。 |
+| [`asr_project`](asr_project/README_zh.md) | 语言识别 | 实时流式语音识别，实时显示识别汉字。 |
+| [`kws_project`](kws_project/README_zh.md) | 关键词唤醒 | 流式唤醒识别，支持可编辑的多个唤醒词，保留唤醒记录。 |
+| [`tts_project`](tts_project/README_zh.md) | 语音合成 | 输入文本进行中文语音合成，通过喇叭进行输出，支持WAV导出。 |
 
 ## 使用说明
 
